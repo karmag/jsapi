@@ -1,0 +1,13 @@
+{
+    "data": {
+        "type": "person",
+        "id": "hello123",
+        "attributes": {
+            "name": "karl",
+            "prio": 5
+        },
+        "meta": {
+            "version": 1230
+        }
+    }
+}

@@ -1,0 +1,37 @@
+* Design
+  - parts
+    - resource definition
+      - set/get attributes
+      - set/get relations
+      - print
+    - resource validation
+    - reading json
+    - writing json
+  - code
+    - protocols
+    - create-resource [name]
+    - validate [resource]
+    - json (read, write)
+
+* Implementation [1/5]
+  - [ ] general [0/2]
+    - [ ] proper default exceptions for all case statements
+    - [ ] reflection warnings
+  - [X] Resource basics [3/3]
+    - [X] Attributes
+    - [X] Relations
+    - [X] Rendering
+  - [ ] Resource validation [0/1]
+    - [ ] Validators
+  - [-] json [0/2]
+    - [-] read
+      - [X] read attributes
+      - [ ] read relationships
+      - [ ] support for more types
+      - [ ] support for {}/[] data
+      - [ ] support for includes
+    - [ ] write
+  - [ ] database [0/3]
+    - [ ] setup schema
+    - [ ] write
+    - [ ] read
