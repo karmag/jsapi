@@ -8,7 +8,7 @@
             [taoensso.carmine :as car :refer [wcar]]))
 
 (def definition
-  (-> "test-definition.clj" io/resource d/read-definition))
+  (-> "resource-definition.clj" io/resource d/read-definition))
 
 (def create-resource
   (r/make definition))
@@ -26,6 +26,20 @@
     \"attributes\": {
       \"name\": \"karl\",
       \"prio\": 5,
+      \"text1\": \"value of some size\",
+  \"text2\": \"value of some size\",
+  \"text3\": \"value of some size\",
+  \"text4\": \"value of some size\",
+  \"text5\": \"value of some size\",
+  \"text6\": \"value of some size\",
+  \"text7\": \"value of some size\",
+  \"text8\": \"value of some size\",
+  \"text9\": \"value of some size\",
+  \"text10\": \"value of some size\",
+  \"text11\": \"value of some size\",
+  \"text12\": \"value of some size\",
+  \"text13\": \"value of some size\",
+  \"text14\": \"value of some size\",
       \"valid-for\": {
         \"start\": \"tomorrow\"
       }
@@ -55,9 +69,9 @@
           write-data (fn [] (wcar {:host "localhost" :port 6379}
                                   (car/set (gen-id) "data goes here")))
 
-          fns [["small write" write-data]
-               ["resource write" write-resource-fast]
-               ["resource parse" parse-resource]
+          fns [#_["small write" write-data]
+               #_["resource write" write-resource-fast]
+               #_["resource parse" parse-resource]
                ["parse + write" (comp write-resource parse-resource)]]]
 
       (doseq [[f-name f] fns]
