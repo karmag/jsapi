@@ -12,9 +12,13 @@
 ;; arrays
 
 (defn array-get
-  ([array index] (aget ^"[Ljava.lang.Object;" array index))
-  ([array i1 i2] (aget ^"[Ljava.lang.Object;" array i1 i2)))
+  ([array index]
+   (aget ^"[Ljava.lang.Object;" array index))
+  ([array i1 i2]
+   (aget ^"[Ljava.lang.Object;" (aget ^"[Ljava.lang.Object;" array i1) i2)))
 
 (defn array-set
-  ([array index value] (aset ^"[Ljava.lang.Object;" array index value))
-  ([array i1 i2 value] (aset ^"[Ljava.lang.Object;" array i1 i2 value)))
+  ([array index value]
+   (aset ^"[Ljava.lang.Object;" array index value))
+  ([array i1 i2 value]
+   (aset ^"[Ljava.lang.Object;" (aget ^"[Ljava.lang.Object;" array i1) i2 value)))

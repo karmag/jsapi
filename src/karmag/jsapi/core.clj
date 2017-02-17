@@ -156,7 +156,7 @@
             (doseq [t threads] (.start ^Thread t))
             (let [start-count @counter
                   start-time (System/currentTimeMillis)]
-              (Thread/sleep 5000)
+              (Thread/sleep 10000)
               (let [end-count @counter
                     end-time (System/currentTimeMillis)]
                 (reset! running false)
