@@ -13,6 +13,21 @@
     - validate [resource]
     - json (read, write)
 
+* Things to fix [0/5]
+  - [ ] Change resource definition to have attributes that have maps
+    instead of vector constraints. Makes lookup much easier.
+    - order
+    - path
+    - db-name
+    - type
+    - const value (have it remove const values, or not include them in
+      order at least)
+  - [ ] Definition should be populated with relevant data (db-name for
+    attributes, type, primary key etc...) when read.
+  - [ ] check what can be done about [sg]et-attr**, macro maybe?
+  - [ ] Contexts are probably not needed. Remove.
+  - [ ] Check naming used for stuff. resource-def, mk-*, ...
+
 * Implementation [1/5]
   - [ ] general [0/2]
     - [ ] proper default exceptions for all case statements
@@ -25,6 +40,7 @@
     - [ ] Validators
   - [-] json [0/2]
     - [-] read
+      - [ ] jsonapi wrapping support
       - [X] read attributes
       - [ ] read relationships
       - [ ] support for more types
@@ -35,3 +51,7 @@
     - [ ] setup schema
     - [ ] write
     - [ ] read
+
+* Client usage
+  - Use version as id. After changing some data the client will have
+    to retry GETs until a resource with higher version is available.

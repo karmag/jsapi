@@ -11,9 +11,9 @@
     (is (= "First Lastsson") (get-attr person path))))
 
 (deftest get-set-relations-test
-  (let [car (test/create-resource "car")]
-    (set-relation car "owner" [123 456])
-    (is (= [123 456] (get-relation car "owner")))))
+  (let [house (test/create-resource "house")]
+    (set-relation house "owner" [123 456])
+    (is (= [123 456] (get-relation house "owner")))))
 
 (deftest get-non-existing-test
   (let [person (test/create-resource "person")]
@@ -22,14 +22,15 @@
       (is (thrown? IllegalArgumentException (set-attr person path :value))))))
 
 (deftest rendering-test
-  (let [car (test/create-resource "car")]
-    (set-attr car ["id"] :id)
-    (set-attr car ["attributes" "model"] [1 2 3])
-    (set-relation car "owner" :none)
-    (is (= (debug-data car)
+  (let [house (test/create-resource "house")]
+    (set-attr house ["id"] :id)
+    (set-attr house ["attributes" "size"] [1 2 3])
+    (set-relation house "owner" :none)
+    (is (= (debug-data house)
            {:attributes
-            [{:index 0 :path ["attributes" "model"] :value [1 2 3]}
-             {:index 1 :path ["id"] :value :id}
-             {:index 2 :path ["type"] :value nil}]
+            [{:index 0 :path ["attributes" "color"] :value nil}
+             {:index 1 :path ["attributes" "size"] :value [1 2 3]}
+             {:index 2 :path ["id"] :value :id}
+             {:index 3 :path ["type"] :value nil}]
             :relations
             [{:index 0 :name "owner" :value :none}]}))))

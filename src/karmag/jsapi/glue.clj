@@ -1,6 +1,6 @@
 (ns karmag.jsapi.glue
   (:require [clojure.java.io :as io]
-            [karmag.jsapi.database :as db]
+            [karmag.jsapi.database.cassandra :as db]
             [karmag.jsapi.definition :as d]
             [karmag.jsapi.http :as http]
             [karmag.jsapi.json :as js]
@@ -65,6 +65,6 @@
    (start definition
           create-resource
           parse-json
-          (db/make "localhost" 6379 create-resource)))
+          (db/make "localhost" 9042 create-resource)))
   ([definition create-resource parse-json database]
    (http/start 9999 (make-handler parse-json database))))

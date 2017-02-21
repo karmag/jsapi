@@ -128,17 +128,14 @@
 ;; resource parse generation
 
 (defn- prepare-attr-data [resource-def]
-  (let [find-type (fn [attr]
-                    (or (first (map #{:string :int} (:constraints attr)))
-                        :string))]
-    (->> (:attributes resource-def)
-         (map (fn [attr]
-                {:type (find-type attr)
-                 :path (:path attr)
-                 :attribute? true}))
-         (reduce (fn [m attr]
-                   (assoc-in m (:path attr) attr))
-                 nil))))
+  (->> (:attributes resource-def)
+       (map (fn [attr]
+              {:type (or (:type attr) :string)
+               :path (:path attr)
+               :attribute? true}))
+       (reduce (fn [m attr]
+                 (assoc-in m (:path attr) attr))
+               nil)))
 
 (defn- mk-populate-from-attrs [attr-data]
   (list parse-object

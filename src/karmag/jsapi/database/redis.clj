@@ -1,4 +1,4 @@
-(ns karmag.jsapi.database
+(ns karmag.jsapi.database.redis
   (:require [karmag.jsapi.protocol :refer :all]
             [karmag.jsapi.util :refer [array-get]]
             [taoensso.carmine :as car :refer [wcar]]))

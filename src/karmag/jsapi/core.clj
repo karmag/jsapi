@@ -1,6 +1,6 @@
 (ns karmag.jsapi.core
   (:require [clojure.java.io :as io]
-            [karmag.jsapi.database :as db]
+            [karmag.jsapi.database.cassandra :as db]
             [karmag.jsapi.definition :as d]
             [karmag.jsapi.json :as js]
             [karmag.jsapi.protocol :refer :all]
@@ -18,35 +18,25 @@
   (js/make definition create-resource))
 
 (def database
-  (db/make "localhost" 6379 create-resource))
+  (db/make "localhost" 9042 definition create-resource))
+
+(comment
+  (try
+    (doseq [x (db/create-schema (:resources definition))]
+      (println x))
+    (catch Exception e
+      (.printStackTrace e))
+    (finally
+      (flush)
+      (Thread/sleep 1000)
+      (System/exit 0))))
 
 (def js-data "{
   \"data\": {
     \"type\": \"person\",
     \"id\": \"hello123\",
     \"attributes\": {
-      \"name\": \"karl\",
-      \"prio\": 5,
-      \"text1\": \"value of some size\",
-  \"text2\": \"value of some size\",
-  \"text3\": \"value of some size\",
-  \"text4\": \"value of some size\",
-  \"text5\": \"value of some size\",
-  \"text6\": \"value of some size\",
-  \"text7\": \"value of some size\",
-  \"text8\": \"value of some size\",
-  \"text9\": \"value of some size\",
-  \"text10\": \"value of some size\",
-  \"text11\": \"value of some size\",
-  \"text12\": \"value of some size\",
-  \"text13\": \"value of some size\",
-  \"text14\": \"value of some size\",
-      \"valid-for\": {
-        \"start\": \"tomorrow\"
-      }
-    },
-    \"meta\": {
-      \"version\": 1230
+      \"name\": \"karl\"
     }
   }
 }")
@@ -142,7 +132,7 @@
                                            (write-resource (parse-resource))))]]]
 
       (doseq [[f-name f] fns]
-        (doseq [thread-count [2 4 8 10 12 16 32]]
+        (doseq [thread-count [50 100 200 300]]
           (reset-register!)
 
           (let [counter (atom 0)
@@ -174,5 +164,6 @@
                   (show "db-save")
                   (show "parse + write")
                   (println))))))))
+    (System/exit 0)
     (finally
       (shutdown-agents))))
